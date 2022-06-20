@@ -1,6 +1,5 @@
-# Pre-reqs: Install MSGraph PowerShell Module: 
-# PS (dir)> Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-# PS (dir)> Install-Module Microsoft.Graph -Scope CurrentUser
+# Pre-reqs: Install "az cli" module
+# `choco install azure-cli`
 
 Param(
     [Parameter(Mandatory=$true)]
