@@ -2,7 +2,6 @@
 # PS (dir)> Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 # PS (dir)> Install-Module Microsoft.Graph -Scope CurrentUser
 
-
 Param(
     [Parameter(Mandatory=$true)]
     [string[]] $groupIds,
@@ -106,7 +105,12 @@ function Main() {
         MessageData = New-Object PSObject -property @{ user = $user; groups = $groups}
     }
     ConfigureTimer -timer $timer -timeInSeconds $pollTime
-    Write-Output "New timer, Interval $($timer.Interval / 1000.0) seconds"
+
+    $timerInterval = if (($timer.Interval / 1000.0) -ge 3600.0) { "$(($timer.Interval / 1000.0) / 3600.0) hours" }
+        elseif (($timer.Interval / 1000) -ge 60) { "$(($timer.Interval / 1000.0) / 60.0) minutes" }
+        else { "$(($timer.Interval / 1000.0) ) seconds" }
+
+    Write-Host "New timer, interval $timerInterval"
 
     Register-ObjectEvent @objectEventSourceArgs *> $null
     $timer.Enabled = $true
