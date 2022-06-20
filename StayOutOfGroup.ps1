@@ -115,6 +115,7 @@ function Main() {
     $timer.Enabled = $true
 
     Write-Output "Start polling..."
+    RemoveFromGroups -user $user -groups $groups
     Wait-Event $sourceIdentifier
 }
 
