@@ -128,6 +128,6 @@ finally {
 }
 
 trap {
-    "Caught it!"
     Unregister-Event -SourceIdentifier $sourceIdentifier
+    Remove-Variable -Name 'sourceIdentifier' -Force
 }
